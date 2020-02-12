@@ -11,11 +11,14 @@ app.use(bodyParser.urlencoded({
   extended:true
 }));
 
-mongoose.connect('mongodb://localhost:270137/wikiDB'{
+mongoose.connect('mongodb://localhost:270137/wikiDB',{
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-app.listen(3000,function{
+
+
+
+app.listen(3000,function() {
   console.log("App is running on Port 3000");
 })
