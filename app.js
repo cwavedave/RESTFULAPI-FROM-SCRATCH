@@ -70,9 +70,12 @@ const post = Article ({
 
   app.route("/articles/:articleName")
 
-
   .get(function(req,res) {
-    Article.findOne({title:req.params.articleName},function(err,foundArticle) {
+
+    const articleTitle = req.params.articleName;
+    console.log(articleTitle);
+
+    Article.findOne({title:articleTitle},function(err,foundArticle) {
       if (foundArticle) {
         res.send(foundArticle);
       } else {
@@ -81,6 +84,40 @@ const post = Article ({
       })
   })
 
+
+  .put(function(req,res) {
+
+   const articleTitle = req.params.articleName;
+
+     Article.update(
+   {title: articleTitle},
+   {content: req.body.newContent},
+   {overwrite: false},
+         function(err) {
+           if(!err) {
+             res.send("Successfully updated the content with PUT");
+           } else {
+             res.send(err);
+           }
+     })
+  })
+
+
+  .patch(function(req,res) {
+
+    const articleTitle = req.params.articleName;
+
+    Article.update(
+      {title: articleTitle},
+      {content: req.body.newContent},
+      function(err){
+        if (!err) {
+          res.send("Successfully updated Selected Article")
+        } else {
+          res.send(err);
+        }
+      })
+    });
 
 
 app.listen(3000, function() {
