@@ -119,20 +119,16 @@ const post = Article ({
       })
     })
 
-    .delete(function(req,res) {
-
+    .delete(function(req, res){
       const articleTitle = req.params.articleName;
-      console.log(articleTitle);
-
-      Article.findOneAndDelete({title:articleTitle}), function (err) {
+      Article.findOneAndDelete({title: articleTitle}, function(err){
         if (!err){
-        res.send("Successfully Deleted Article");
-        console.log("Deleted");
-      } else {
+          res.send("Successfully deleted selected article.");
+        } else {
           res.send(err);
-          console.log(err);
-      }
-    }});
+        }
+      });
+    });
 
 
 app.listen(3000, function() {
