@@ -117,7 +117,22 @@ const post = Article ({
           res.send(err);
         }
       })
-    });
+    })
+
+    .delete(function(req,res) {
+
+      const articleTitle = req.params.articleName;
+      console.log(articleTitle);
+
+      Article.findOneAndDelete({title:articleTitle}), function (err) {
+        if (!err){
+        res.send("Successfully Deleted Article");
+        console.log("Deleted");
+      } else {
+          res.send(err);
+          console.log(err);
+      }
+    }});
 
 
 app.listen(3000, function() {
